@@ -46,10 +46,3 @@ class CollatzConjecture:
 
     def fullDescription(self):
         return f"{self.__str__()}\nElapsed time = {self.elapsedTime}"
-
-""" # TEST BASE - DICT_OPTIMIZED
-A = CollatzConjecture(1, 100001)
-print(f"Tempo per la versione base = {A.elapsedTime}")
-B = CollatzConjecture_v2_DictOptimizated(1, 100001)
-print(f"Tempo per la versione dict_based = {B.elapsedTime}")
-print(f"Ottimizzazione = " + str(abs(round((A.elapsedTime-B.elapsedTime)/(A.elapsedTime+B.elapsedTime)*100, 3))) + "%") """
