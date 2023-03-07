@@ -25,14 +25,6 @@ class CollatzConjecture_v2_DictOptimizated:
             self.elapsedTime = end - start
 
     def __getSequence(self, n : int) -> list:
-        """ if n == 1:
-            return [1]
-        elif CollatzConjecture_v2_DictOptimizated.__isPair(n):
-            return [n] + self.__getSequence(int(n/2))
-        return [n] + self.__getSequence(int(3*n+1)) """
-        """ if n == 1:
-            return [1]
-        el """
         if n in self.optimization.keys():
             return self.optimization[n]
         elif CollatzConjecture_v2_DictOptimizated.__isPair(n):
