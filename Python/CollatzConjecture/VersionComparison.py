@@ -1,12 +1,13 @@
 from CollatzConjecture import CollatzConjecture
 from CollatzConjecture_v2_DictOptimizated import CollatzConjecture_v2_DictOptimizated
+
 import os
 
 def compareVersion():
     def getPercentImprove(elapsedTime1, elapsedTime2):
-         value = (elapsedTime1.elapsedTime-elapsedTime2.elapsedTime)/(elapsedTime1.elapsedTime+elapsedTime2.elapsedTime)
-         percent = abs(round(value * 100, 3))
-         return f"{percent}%"
+        value = (elapsedTime1.elapsedTime-elapsedTime2.elapsedTime)/(elapsedTime1.elapsedTime+elapsedTime2.elapsedTime)
+        percent = abs(round(value * 100, 3))
+        return f"{percent}%"
     
     os.system("clear")
         
@@ -21,5 +22,6 @@ def compareVersion():
     # Percent
     print(f"\nOptimization:")
     print(f"\tbase - dict\t{getPercentImprove(baseCollatz, dictCollatz)}")
+    print()
 
 compareVersion()
