@@ -22,7 +22,7 @@ def compareVersion():
         print(f"\t{k} version \t\t {versions[k].elapsedTime}s")
     print()
 
-    print(f"\nOptimization:")
+    print(f"Optimization:")
     for k in versions.keys():
         if versions[k] == versions["Base"]:
             optimization = getPercentImprove(versions["Base"], versions[k])
