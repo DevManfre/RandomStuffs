@@ -12,7 +12,7 @@ class CollatzConjectureDictOptimizated(CollatzConjecture):
             self.sequence = self.__getSequence(self.n)
             end = time.time()
             self.elapsedTime = end - start
-        # Case: 2 int param
+        # Case: 2 int params
         elif len(args) == 2 and type(args[0]) is type(args[1]) is int:
             start = time.time()
             self.sequence = {x : self.__getSequence(x) for x in range(args[0], args[1])}
@@ -28,14 +28,14 @@ class CollatzConjectureDictOptimizated(CollatzConjecture):
     def __getSequence(self, n : int) -> list:
         if n in self.optimization.keys():
             return self.optimization[n]
-        elif CollatzConjectureDictOptimizated.__isPair(n):
+        elif self.__isPair(n):
             self.optimization[n] = [n] + self.__getSequence(int(n/2))
         else:
             self.optimization[n] = [n] + self.__getSequence(int(3*n+1))
         
         return self.optimization[n]
     
-    def __isPair(n : int) -> bool:
+    def __isPair(self, n : int) -> bool:
         if n % 2 == 0:
             return True
         return False

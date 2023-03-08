@@ -6,30 +6,30 @@ class CollatzConjecture:
         if len(args) == 1 and type(args[0]) is int:
             self.n = args[0]
             start = time.time()
-            self.sequence = CollatzConjecture.__getSequence(self.n)
+            self.sequence = self.__getSequence(self.n)
             end = time.time()
             self.elapsedTime = end - start
         # Case: 2 int param
         elif len(args) == 2 and type(args[0]) is type(args[1]) is int:
             start = time.time()
-            self.sequence = {x : CollatzConjecture.__getSequence(x) for x in range(args[0], args[1])}
+            self.sequence = {x : self.__getSequence(x) for x in range(args[0], args[1])}
             end = time.time()
             self.elapsedTime = end - start
         # Case: 1 list or tuple param
         elif len(args) ==1 and type(args[0]) is tuple or type(args[0]) is list:
             start = time.time()
-            self.sequence = {x : CollatzConjecture.__getSequence(x) for x in range(args[0][0], args[0][1])}
+            self.sequence = {x : self.__getSequence(x) for x in range(args[0][0], args[0][1])}
             end = time.time()
             self.elapsedTime = end - start
 
-    def __getSequence(n : int) -> list:
+    def __getSequence(self, n : int) -> list:
         if n == 1:
             return [1]
-        elif CollatzConjecture.__isPair(n):
-            return [n] + CollatzConjecture.__getSequence(int(n/2))
-        return [n] + CollatzConjecture.__getSequence(int(3*n+1))
+        elif self.__isPair(n):
+            return [n] + self.__getSequence(int(n/2))
+        return [n] + self.__getSequence(int(3*n+1))
     
-    def __isPair(n : int) -> bool:
+    def __isPair(self, n : int) -> bool:
         if n % 2 == 0:
             return True
         return False
