@@ -4,27 +4,33 @@ from CollatzConjectureDictOptimizated import CollatzConjectureDictOptimizated
 import os
 
 def compareVersion():
-    def getPercentImprove(elapsedTime1, elapsedTime2):
-        value = (elapsedTime1.elapsedTime-elapsedTime2.elapsedTime)/(elapsedTime1.elapsedTime+elapsedTime2.elapsedTime)
-        percent = abs(round(value * 100, 3))
-        return f"{percent}%"
+    def getPercentImprove(obj1 : CollatzConjecture, obj2 : CollatzConjecture):
+        value = (obj1.elapsedTime-obj2.elapsedTime)/(obj1.elapsedTime+obj2.elapsedTime)
+        
+        return abs(round(value * 100, 3))
     
     os.system("clear")
-        
-    # Base Version
-    baseCollatz = CollatzConjecture(1, 100001)
-    print(f"Exec time base version \t\t {baseCollatz.elapsedTime}")
 
-    # Dict Version
-    dictCollatz = CollatzConjectureDictOptimizated(1, 100001)
-    print(f"Exec time dict version \t\t {dictCollatz.elapsedTime}")
+    start, end = 1, 100001
+    versions = {
+        "Base": CollatzConjecture(start, end),
+        "Dict": CollatzConjectureDictOptimizated(start, end)
+    }
 
-    # Percent
-    if (baseCollatz == dictCollatz):
-        print(f"\nOptimization:")
-        print(f"\tdict - base\t{getPercentImprove(baseCollatz, dictCollatz)}")
-    else:
-        print("The objects aren't equals...")
+    print("Execution time:")
+    for k in versions.keys():
+        print(f"\t{k} version \t\t {versions[k].elapsedTime}s")
+    print()
+
+    print(f"\nOptimization:")
+    for k in versions.keys():
+        if versions[k] == versions["Base"]:
+            optimization = getPercentImprove(versions["Base"], versions[k])
+            if int(optimization) == 0:
+                continue
+            print(f"\t{k} - Base\t\t{optimization}%")
+        else:
+            print(f"{k} and base aren't equals...")
     print()
 
 compareVersion()
