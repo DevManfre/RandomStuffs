@@ -2,25 +2,20 @@ import time
 
 class CollatzConjecture:
     def __init__ (self, *args):
+        self.elapsedTime = time.time()
+
         # Case: 1 int param
         if len(args) == 1 and type(args[0]) is int:
             self.n = args[0]
-            start = time.time()
             self.sequence = self._getSequence(self.n)
-            end = time.time()
-            self.elapsedTime = end - start
         # Case: 2 int param
         elif len(args) == 2 and type(args[0]) is type(args[1]) is int:
-            start = time.time()
             self.sequence = {x : self._getSequence(x) for x in range(args[0], args[1])}
-            end = time.time()
-            self.elapsedTime = end - start
         # Case: 1 list or tuple param
         elif len(args) ==1 and type(args[0]) is tuple or type(args[0]) is list:
-            start = time.time()
             self.sequence = {x : self._getSequence(x) for x in range(args[0][0], args[0][1])}
-            end = time.time()
-            self.elapsedTime = end - start
+        
+        self.elapsedTime = time.time() - self.elapsedTime
 
     def _getSequence(self, n : int) -> list:
         if n == 1:
