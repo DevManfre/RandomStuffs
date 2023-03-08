@@ -1,4 +1,5 @@
 from CollatzConjecture import CollatzConjecture
+import sys
 
 class CollatzConjectureDictOptimizated(CollatzConjecture):
     def __init__ (self, *args):
@@ -17,3 +18,6 @@ class CollatzConjectureDictOptimizated(CollatzConjecture):
             self.optimization[n] = [n] + self._getSequence(int(3*n+1))
         
         return self.optimization[n]
+    
+    def __sizeof__(self) -> int:
+        return super().__sizeof__() + sys.getsizeof(self.optimization)
