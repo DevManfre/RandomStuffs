@@ -20,8 +20,11 @@ def compareVersion():
     print(f"Exec time dict version \t\t {dictCollatz.elapsedTime}")
 
     # Percent
-    print(f"\nOptimization:")
-    print(f"\tdict - base\t{getPercentImprove(baseCollatz, dictCollatz)}")
+    if (baseCollatz == dictCollatz):
+        print(f"\nOptimization:")
+        print(f"\tdict - base\t{getPercentImprove(baseCollatz, dictCollatz)}")
+    else:
+        print("The objects aren't equals...")
     print()
 
 compareVersion()
