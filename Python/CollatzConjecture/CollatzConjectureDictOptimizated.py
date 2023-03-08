@@ -1,4 +1,3 @@
-import time
 from CollatzConjecture import CollatzConjecture
 
 class CollatzConjectureDictOptimizated(CollatzConjecture):
