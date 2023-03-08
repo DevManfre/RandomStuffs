@@ -1,6 +1,6 @@
 import time
 
-class CollatzConjecture_v2_DictOptimizated:
+class CollatzConjectureDictOptimizated:
     def __init__ (self, *args):
         self.optimization = {1:[1]}
 
@@ -27,7 +27,7 @@ class CollatzConjecture_v2_DictOptimizated:
     def __getSequence(self, n : int) -> list:
         if n in self.optimization.keys():
             return self.optimization[n]
-        elif CollatzConjecture_v2_DictOptimizated.__isPair(n):
+        elif CollatzConjectureDictOptimizated.__isPair(n):
             self.optimization[n] = [n] + self.__getSequence(int(n/2))
         else:
             self.optimization[n] = [n] + self.__getSequence(int(3*n+1))

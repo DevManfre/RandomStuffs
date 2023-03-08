@@ -1,5 +1,5 @@
 from CollatzConjecture import CollatzConjecture
-from CollatzConjecture_v2_DictOptimizated import CollatzConjecture_v2_DictOptimizated
+from CollatzConjectureDictOptimizated import CollatzConjectureDictOptimizated
 
 import os
 
@@ -16,7 +16,7 @@ def compareVersion():
     print(f"Exec time base version \t\t {baseCollatz.elapsedTime}")
 
     # Dict Version
-    dictCollatz = CollatzConjecture_v2_DictOptimizated(1, 100001)
+    dictCollatz = CollatzConjectureDictOptimizated(1, 100001)
     print(f"Exec time dict version \t\t {dictCollatz.elapsedTime}")
 
     # Percent
