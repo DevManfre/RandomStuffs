@@ -21,7 +21,7 @@ def compareVersion():
 
     # Percent
     print(f"\nOptimization:")
-    print(f"\tbase - dict\t{getPercentImprove(baseCollatz, dictCollatz)}")
+    print(f"\tdict - base\t{getPercentImprove(baseCollatz, dictCollatz)}")
     print()
 
 compareVersion()
