@@ -1,6 +1,7 @@
 import time
+from CollatzConjecture import CollatzConjecture
 
-class CollatzConjectureDictOptimizated:
+class CollatzConjectureDictOptimizated(CollatzConjecture):
     def __init__ (self, *args):
         self.optimization = {1:[1]}
 
@@ -38,16 +39,4 @@ class CollatzConjectureDictOptimizated:
         if n % 2 == 0:
             return True
         return False
-    
-    def __str__(self) -> str:
-        try:
-            type(self.n)
-            return f"{self.n} -> {str(self.sequence)}"
-        except Exception:
-            string = ""
-            for k in self.sequence.keys():
-                string += f"{k} -> {self.sequence[k]}\n"
-            return string[:len(string)-1]
 
-    def fullDescription(self):
-        return f"{self.__str__()}\nElapsed time = {self.elapsedTime}"
