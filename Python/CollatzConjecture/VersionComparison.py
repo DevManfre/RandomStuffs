@@ -6,12 +6,14 @@ import sys
 
 def compareVersion():
     def getPercentTimeImprove(obj1 : CollatzConjecture, obj2 : CollatzConjecture):
-        value = (obj1.elapsedTime-obj2.elapsedTime)/(obj1.elapsedTime+obj2.elapsedTime)
+        value = (obj1.elapsedTime-obj2.elapsedTime)/(obj1.elapsedTime)
         
-        return abs(round(value * 100, 3))
+        return round(value * 100, 3)
     
     def getPercentSpaceImprove(obj1 : CollatzConjecture, obj2 : CollatzConjecture):
-        return 0
+        value = (sys.getsizeof(obj1)-sys.getsizeof(obj2))/(sys.getsizeof(obj1))
+        
+        return round(value * 100, 3)
 
     os.system("clear")
 
