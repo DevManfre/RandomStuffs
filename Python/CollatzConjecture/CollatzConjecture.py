@@ -1,4 +1,5 @@
 import time
+import sys
 
 class CollatzConjecture:
     def __init__ (self, *args):
@@ -31,7 +32,7 @@ class CollatzConjecture:
     
     def fullDescription(self):
         return f"{self.__str__()}\nElapsed time = {self.elapsedTime}"
-    
+
     def __str__(self) -> str:
         try:
             type(self.n)
@@ -48,3 +49,16 @@ class CollatzConjecture:
                 return self.sequence == __o.sequence
         
         return False
+    
+    def __sizeof__(self) -> int:
+        elements = [
+            self.elapsedTime,
+            self.sequence
+        ]
+
+        try:
+            elements.append(self.n)
+        except Exception:
+            pass
+
+        return sum([sys.getsizeof(el) for el in elements])
