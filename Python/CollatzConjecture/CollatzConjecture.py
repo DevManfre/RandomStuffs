@@ -30,7 +30,7 @@ class CollatzConjecture:
             return True
         return False
     
-    def fullDescription(self):
+    def fullDescription(self) -> None:
         return f"{self.__str__()}\nElapsed time = {self.elapsedTime}"
 
     def __str__(self) -> str:
@@ -43,7 +43,7 @@ class CollatzConjecture:
                 string += f"{k} -> {self.sequence[k]}\n"
             return string[:len(string)-1]
 
-    def __eq__(self, __o: object ):
+    def __eq__(self, __o: object) -> bool:
         if isinstance(__o, CollatzConjecture):
             if type(self.sequence) == type(__o.sequence) == list or type(self.sequence) == type(__o.sequence) == dict:
                 return self.sequence == __o.sequence
