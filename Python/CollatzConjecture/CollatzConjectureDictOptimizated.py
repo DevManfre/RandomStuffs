@@ -1,23 +1,19 @@
 from CollatzConjecture import CollatzConjecture
-import sys
 
 class CollatzConjectureDictOptimizated(CollatzConjecture):
     def __init__ (self, *args):
-        self.optimization = {
+        self.sequence = {
             1:[1]
         }
         
         super().__init__(args)
 
     def _getSequence(self, n : int) -> list:
-        if n in self.optimization.keys():
-            return self.optimization[n]
+        if n in self.sequence.keys():
+            return self.sequence[n]
         elif self._isPair(n):
-            self.optimization[n] = [n] + self._getSequence(int(n/2))
+            self.sequence[n] = [n] + self._getSequence(int(n/2))
         else:
-            self.optimization[n] = [n] + self._getSequence(int(3*n+1))
+            self.sequence[n] = [n] + self._getSequence(int(3*n+1))
         
-        return self.optimization[n]
-    
-    def __sizeof__(self) -> int:
-        return super().__sizeof__() + sys.getsizeof(self.optimization)
+        return self.sequence[n]

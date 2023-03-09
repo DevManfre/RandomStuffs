@@ -8,7 +8,7 @@ class VersionComparison:
     def __init__(self, start, end):
         self.versions = {
             "Base": CollatzConjecture(start, end),
-            "Dict": CollatzConjectureDictOptimizated(start, end)
+            "Dict": CollatzConjectureDictOptimizated(start, end),
         }
     
     def getPercentTimeImprove(obj1 : CollatzConjecture, obj2 : CollatzConjecture):
