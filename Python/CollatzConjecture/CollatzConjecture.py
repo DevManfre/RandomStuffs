@@ -5,6 +5,10 @@ class CollatzConjecture:
     def __init__ (self, *args):
         self.elapsedTime = time.time()
 
+        self.sequence = {
+            1:[1]
+        }
+
         # Case: 1 int param
         if len(args) == 1 and type(args[0]) is int:
             self.n = args[0]
@@ -19,11 +23,14 @@ class CollatzConjecture:
         self.elapsedTime = time.time() - self.elapsedTime
 
     def _getSequence(self, n : int) -> list:
-        if n == 1:
-            return [1]
+        if n in self.sequence.keys():
+            return self.sequence[n]
         elif self._isPair(n):
-            return [n] + self._getSequence(int(n/2))
-        return [n] + self._getSequence(int(3*n+1))
+            self.sequence[n] = [n] + self._getSequence(int(n/2))
+        else:
+            self.sequence[n] = [n] + self._getSequence(int(3*n+1))
+        
+        return self.sequence[n]
     
     def _isPair(self, n : int) -> bool:
         if n % 2 == 0:
