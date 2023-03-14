@@ -212,9 +212,3 @@ class Keylogger:
         startDatetimeString = str(self.startDatetime)[:-7].replace(" ", "-").replace(":", "")
         endDatetimeString = str(self.endDatetime)[:-7].replace(" ", "-").replace(":", "")
         self.fileName = f"keylog-{startDatetimeString}_{endDatetimeString}"
-
-if __name__ == "__main__":
-    Keylogger(
-        interval=5,
-        onlyOneFile=True
-    ).start()
