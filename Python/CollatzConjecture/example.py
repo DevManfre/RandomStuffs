@@ -12,3 +12,7 @@ print(A)
 
 # fullDescription -> get all sequence and the elapsed time (for testing)
 print(A.fullDescription())
+
+# generator -> get a generator for a single o more sequences
+for n in A.generator():
+    print(n)
