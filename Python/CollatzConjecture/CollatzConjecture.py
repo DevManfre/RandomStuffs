@@ -22,6 +22,15 @@ class CollatzConjecture:
         
         self.elapsedTime = time.time() - self.elapsedTime
 
+    def generator(self):
+        if type(self.sequence) is list:
+            # if there is only one sequence
+            return self.sequence
+        elif type(self.sequence) is dict:
+            for key in self.sequence.keys():
+                for n in self.sequence[key]:
+                    yield n
+        
     def _getSequence(self, n : int) -> list:
         if n in self.sequence.keys():
             return self.sequence[n]
