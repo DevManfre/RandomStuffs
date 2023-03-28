@@ -27,6 +27,7 @@ For the commit, it use a revised [gitmoji.dev](http://www.gitmoji.dev) to explai
 | :heavy_plus_sign: | heavy_plus_sign | Add new dependencies. |
 | :loud_sound: | loud_sound | Add or update logs or outputs. |
 | :memo: | memo | Add or update documentation. |
+| :page_facing_up: | page_facing_up | Add or update license. |
 | :passport_control: | passport_control | Work on code related to authorization, roles and permissions. |
 | :poop: | poop | Write bad code that needs to be improved. |
 | :see_no_evil: | see_no_evil | Add or update .gitignore file. |
