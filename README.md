@@ -3,6 +3,7 @@ Random code written on my breaks.
 
 ## Index
 1. [Code Index](#code-index)
+    * [Python](#python)
 2. [Commit Syntax](#commit-syntax)
 
 ## Code Index
