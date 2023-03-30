@@ -8,8 +8,8 @@ Random code written on my breaks.
 
 ## Code Index
 ### Python
-- Collatz Conjecture -> python class for the collatz conjecture sequence
-- Keylogger -> python class for a keylogger malware
+- **Collatz Conjecture** -> python class for the collatz conjecture sequence
+- **Keylogger** -> python class for a keylogger malware
 
 ## Commit Syntax
 For the commit, it use a revised [gitmoji.dev](http://www.gitmoji.dev) to explain the goal of the commit. In details, check the table below.
