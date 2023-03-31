@@ -1,6 +1,8 @@
 # Random Stuffs
 Random code written on my breaks.
 
+[![LICENSE](https://img.shields.io/badge/license-BSD-green)](/LICENSE)
+
 ## Index
 1. [Code Index](#code-index)
     * [Python](#python)
