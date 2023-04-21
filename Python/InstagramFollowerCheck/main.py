@@ -2,7 +2,7 @@ from instagram_private_api import Client
 import numpy as np
 import time
 
-def list_diff(li1, li2): 
+""" def list_diff(li1, li2): 
     li_dif = [i for i in li1 + li2 if i not in li1] 
     return li_dif 
 
@@ -44,4 +44,4 @@ print(np.sort(list_diff(fwers_list_flat, fwing_list_flat)))
 
 print('_________________________________________')
 print('Here are the followers you are not following! \n\n')
-print(np.sort(list_diff(fwing_list_flat, fwers_list_flat)))
+print(np.sort(list_diff(fwing_list_flat, fwers_list_flat))) """
