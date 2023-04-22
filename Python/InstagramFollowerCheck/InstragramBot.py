@@ -14,3 +14,12 @@ class InstagramBot:
     def followingInformation(self) -> dict:
         return self.api.user_following(self.userId, self.token)
     
+    def unfollowersList(self) -> list:
+        followingSet = {user["username"] for user in self.followingInformation()["users"]}
+        followersSet = {user["username"] for user in self.followersInformation()["users"]}
+        
+        unfollowersSet = followingSet.difference(followersSet)
+        unfollowersList = sorted(list(unfollowersSet))
+
+        return unfollowersList
+    
