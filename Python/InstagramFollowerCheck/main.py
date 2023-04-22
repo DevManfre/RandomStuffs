@@ -6,8 +6,8 @@ def list_diff(li1, li2):
     li_dif = [i for i in li1 + li2 if i not in li1] 
     return li_dif 
 
-username = ''
-password = ''
+username = 'lost.manfre'
+password = 'TW9OJz598eh^JPv3#4k5fr7PJ'
 api = Client(username, password)
 results = api.feed_timeline()
 rnk_token = api.generate_uuid()

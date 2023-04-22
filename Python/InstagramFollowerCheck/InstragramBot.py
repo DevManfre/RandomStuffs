@@ -11,3 +11,6 @@ class InstagramBot:
     def followersInformation(self) -> dict:
         return self.api.user_followers(self.userId, self.token)
     
+    def followingInformation(self) -> dict:
+        return self.api.user_following(self.userId, self.token)
+    
