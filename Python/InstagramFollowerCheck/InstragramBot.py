@@ -8,3 +8,6 @@ class InstagramBot:
         self.token : str = self.api.generate_uuid()
         self.userId : str = self.api.authenticated_user_id
     
+    def followersInformation(self) -> dict:
+        return self.api.user_followers(self.userId, self.token)
+    
