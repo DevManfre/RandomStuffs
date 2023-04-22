@@ -23,11 +23,11 @@ class InstagramBot:
 
         return unfollowersList
     
-    def fanList(self) -> list:
+    def friendsList(self) -> list:
         followingSet = {user["username"] for user in self.followingInformation()["users"]}
         followersSet = {user["username"] for user in self.followersInformation()["users"]}
 
-        fanSet = followingSet.intersection(followersSet)
-        fanList = sorted(list(fanSet))
+        friendsSet = followingSet.intersection(followersSet)
+        friendsList = sorted(list(friendsSet))
 
-        return fanList
+        return friendsList
