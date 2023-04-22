@@ -14,20 +14,24 @@ class InstagramBot:
     def followingInformation(self) -> dict:
         return self.api.user_following(self.userId, self.token)
     
+    def followUsernameSets(self) -> tuple:
+        followingSet : set = {user["username"] for user in self.followingInformation()["users"]}
+        followersSet : set = {user["username"] for user in self.followersInformation()["users"]}
+
+        return followingSet, followersSet
+    
     def unfollowersList(self) -> list:
-        followingSet = {user["username"] for user in self.followingInformation()["users"]}
-        followersSet = {user["username"] for user in self.followersInformation()["users"]}
+        followingSet, followersSet = self.followUsernameSets()
         
-        unfollowersSet = followingSet.difference(followersSet)
-        unfollowersList = sorted(list(unfollowersSet))
+        unfollowersSet : set = followingSet.difference(followersSet)
+        unfollowersList : list = sorted(list(unfollowersSet))
 
         return unfollowersList
     
     def friendsList(self) -> list:
-        followingSet = {user["username"] for user in self.followingInformation()["users"]}
-        followersSet = {user["username"] for user in self.followersInformation()["users"]}
+        followingSet, followersSet = self.followUsernameSets()
 
-        friendsSet = followingSet.intersection(followersSet)
-        friendsList = sorted(list(friendsSet))
+        friendsSet : set = followingSet.intersection(followersSet)
+        friendsList : set = sorted(list(friendsSet))
 
         return friendsList
