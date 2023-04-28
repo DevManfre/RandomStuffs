@@ -42,6 +42,10 @@ class InstagramBot:
         return unfollowers
     
     def friendsList(self) -> list:
+        """
+        Return a list contains usernames following the account and vice versa.
+        """
+
         followers : set = {user["username"] for user in self.followersDict()["users"]}
         following : set = {user["username"] for user in self.followingsDict()["users"]}
 
