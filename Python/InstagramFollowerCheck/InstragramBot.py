@@ -30,6 +30,10 @@ class InstagramBot:
         return self.api.user_following(self.userId, self.token)
     
     def unfollowersList(self) -> list:
+        """
+        Return a list contains usernames that the account follows but they don't.
+        """
+
         followers : set = {user["username"] for user in self.followersDict()["users"]}
         following : set = {user["username"] for user in self.followingsDict()["users"]}
 
