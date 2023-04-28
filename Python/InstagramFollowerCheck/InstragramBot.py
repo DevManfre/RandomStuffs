@@ -23,6 +23,9 @@ class InstagramBot:
         return self.api.user_followers(self.userId, self.token)
     
     def followingInformation(self) -> dict:
+        """
+        Return a dict contains all information about every single following.
+        """
         return self.api.user_following(self.userId, self.token)
     
     def followUsernameSets(self) -> tuple:
