@@ -16,6 +16,10 @@ class InstagramBot:
         self.userId : str = self.api.authenticated_user_id
     
     def followersInformation(self) -> dict:
+        """
+        Return a dict contains all information about every single followers.
+        """
+
         return self.api.user_followers(self.userId, self.token)
     
     def followingInformation(self) -> dict:
