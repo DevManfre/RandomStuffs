@@ -32,12 +32,12 @@ class InstagramBot:
         # Client settings
         if os.path.isfile(paths["CACHE"]) and os.path.isfile(paths["CREDENTIALS"]):
             self.logger.debug(f"Loading cache files")
-            
+
             cache, credentials = self.loadLogin(paths)
 
             # Reuse auth settings
             self.api = Client(
-                credentials["username"], 
+                credentials["username"],
                 credentials["password"],
                 settings=cache
             )
@@ -186,7 +186,3 @@ class InstagramBot:
             credentials = json.load(file_data, object_hook=fromJson)
 
         return cachedSettings, credentials
-
-#bot = InstagramBot("lost.manfre", "UsVaRD6!@DcU%n8#jMnszMK%f")
-bot = InstagramBot("caccaebrufoli", "caccaebrufoli00", True)
-print(bot.followingUsernamesList())
