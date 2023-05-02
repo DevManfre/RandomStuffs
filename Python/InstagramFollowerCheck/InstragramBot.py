@@ -41,6 +41,22 @@ class InstagramBot:
 
         return followInfo
 
+    def __combinatedUsernameList(self, callingFunction) -> list:
+        """
+        Function called from unfollowersUsernamesList and friendsUsernamesList to
+        avoid repeated lines of code.
+        Given one param function (set.difference or set.intersection) the main
+        function returns a list composed of followers and following assembled by
+        the given function).
+        """
+
+        followers : set = set(self.followersUsernamesList())
+        following : set = set(self.followingUsernamesList())
+
+        results : list = list(callingFunction(following, followers))
+
+        return sorted(results)
+
     def followersInformationList(self) -> list:
         """
         Returns a list of dicts. Each dict is a follower with many information.
@@ -74,21 +90,11 @@ class InstagramBot:
         Returns the following that isn't followers, thas is unfollowers.
         """
 
-        followers : set = set(self.followersUsernamesList())
-        following : set = set(self.followingUsernamesList())
-
-        unfollowers : list = list(following.difference(followers))
-
-        return sorted(unfollowers)
+        return self.__combinatedUsernameList(set.difference)
     
     def friendsUsernamesList(self) -> list:
         """
         Returns the following that is followers, thas is friends.
         """
-
-        followers : set = set(self.followersUsernamesList())
-        following : set = set(self.followingUsernamesList())
-
-        unfollowers : list = list(following.intersection(followers))
-
-        return sorted(unfollowers)
+    
+        return self.__combinatedUsernameList(set.intersection)
