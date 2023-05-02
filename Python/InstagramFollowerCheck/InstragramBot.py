@@ -15,46 +15,42 @@ class InstagramBot:
         self.token : str = self.api.generate_uuid()
         self.userId : str = self.api.authenticated_user_id
 
-    def followersInformationList(self) -> list:
+    def __followInformationList(self, callingFunction) -> list:
         """
-        Returns a list of dicts. Each dict is a follower with many information.
+        Function called from followersInformationList and followingInformationList to
+        avoid repeated lines of code.
+        Given one param function (instagram_private_api.Client.user_followers or 
+        instagram_private_api.Client.user_following) the main function returns
+        a list with all pagination together (composed respectively of followers or
+        following).
         """
 
-        # Get first pagination
-        results : dict = self.api.user_followers(self.userId, self.token)
-        followersInfo : list = results["users"]
+        results : dict = callingFunction(self.userId, self.token)
+        followInfo : list = results["users"]
         nextMaxId : str = results["next_max_id"]
         
         # Get others pagination
         while nextMaxId:
-            results = self.api.user_followers(self.userId, self.token, max_id=nextMaxId)
-            followersInfo.extend(results["users"])
+            results = callingFunction(self.userId, self.token, max_id=nextMaxId)
+            followInfo.extend(results["users"])
             try:
                 nextMaxId = results["next_max_id"]
             except Exception:
                 # If exception occurs, it means there isn't other paginations
                 nextMaxId = None
 
-        return followersInfo
+        return followInfo
+
+    def followersInformationList(self) -> list:
+        """
+        Returns a list of dicts. Each dict is a follower with many information.
+        """
+
+        return self.__followInformationList(self.api.user_followers)
     
     def followingInformationList(self) -> list:
         """
         Returns a list of dicts. Each dict is a following with many information.
         """
 
-        # Get first pagination
-        results : dict = self.api.user_following(self.userId, self.token)
-        followingInfo : list = results["users"]
-        nextMaxId : str = results["next_max_id"]
-        
-        # Get others pagination
-        while nextMaxId:
-            results = self.api.user_following(self.userId, self.token, max_id=nextMaxId)
-            followingInfo.extend(results["users"])
-            try:
-                nextMaxId = results["next_max_id"]
-            except Exception:
-                # If exception occurs, it means there isn't other paginations
-                nextMaxId = None
-
-        return followingInfo
+        return self.__followInformationList(self.api.user_following)
