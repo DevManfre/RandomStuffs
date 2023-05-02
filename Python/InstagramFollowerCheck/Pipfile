@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 instagram-private-api = "*"
 numpy = "*"
+coloredlogs = "*"
 
 [dev-packages]
 
