@@ -54,3 +54,10 @@ class InstagramBot:
         """
 
         return self.__followInformationList(self.api.user_following)
+
+    def followersUsernamesList(self) -> list:
+        """
+        Return a sorted list contains the followers usernames.
+        """
+
+        return sorted([follower["username"] for follower in self.followersInformationList()])
