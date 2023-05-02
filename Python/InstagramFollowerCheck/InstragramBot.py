@@ -1,4 +1,6 @@
 from instagram_private_api import Client
+import logging
+import coloredlogs
 
 
 class InstagramBot:
@@ -6,10 +8,21 @@ class InstagramBot:
     Implementantion for instagram_private_api
     The init method accepts 2 params: username and password so it can have:
     - api -> the logged client using the given username and password;
-    - token, userId -> used for many intragram_private_api function
+    - token, userId -> used for many intragram_private_api function;
+    - logger -> used for debugging in the terminal.
     """
 
     def __init__(self, username: str, password: str):
+        # Logger Settings
+        self.logger = logging.getLogger(username)
+        coloredlogs.install(
+            level='DEBUG',
+            logger=self.logger,
+            fmt="%(asctime)s %(hostname)s %(name)s %(levelname)s    \t%(message)s"
+        )
+
+        # Client settings
+        self.logger.info(f"Creating a client for \033[01m{username}\033[0m")
         self.username: str = username
         self.password: str = password
         self.api: Client = Client(username, password)
@@ -26,9 +39,15 @@ class InstagramBot:
         following).
         """
 
+        self.logger.debug(f"Calling the API method \033[01m{callingFunction.__name__}\033[0m")
+
         results: dict = callingFunction(self.userId, self.token)
         followInfo: list = results["users"]
-        nextMaxId: str = results["next_max_id"]
+        try:
+            nextMaxId: str = results["next_max_id"]
+        except:
+            # Error -> 0 follow, that is an empty followInfo list
+            return []
 
         # Get others pagination
         while nextMaxId:
@@ -78,6 +97,7 @@ class InstagramBot:
         Return a sorted list contains the followers usernames.
         """
 
+        self.logger.info("Getting the follower list")
         return sorted([follower["username"] for follower in self.followersInformationList()])
 
     def followingUsernamesList(self) -> list:
@@ -85,6 +105,7 @@ class InstagramBot:
         Return a sorted list contains the following usernames.
         """
 
+        self.logger.info("Getting the following list")
         return sorted([following["username"] for following in self.followingInformationList()])
 
     def unfollowersUsernamesList(self) -> list:
@@ -92,6 +113,7 @@ class InstagramBot:
         Returns the following that isn't followers, thas is unfollowers.
         """
 
+        self.logger.info("Getting the unfollower list")
         return self.__combinatedUsernameList(set.difference)
 
     def friendsUsernamesList(self) -> list:
@@ -99,4 +121,5 @@ class InstagramBot:
         Returns the following that is followers, thas is friends.
         """
 
+        self.logger.info("Getting the friends list")
         return self.__combinatedUsernameList(set.intersection)
