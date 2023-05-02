@@ -69,7 +69,7 @@ class InstagramBot:
 
         return sorted([following["username"] for following in self.followingInformationList()])
 
-    def unfollowersUsernameList(self) -> list:
+    def unfollowersUsernamesList(self) -> list:
         """
         Returns the following that isn't followers, thas is unfollowers.
         """
@@ -78,5 +78,17 @@ class InstagramBot:
         following : set = set(self.followingUsernamesList())
 
         unfollowers : list = list(following.difference(followers))
+
+        return sorted(unfollowers)
+    
+    def friendsUsernamesList(self) -> list:
+        """
+        Returns the following that is followers, thas is friends.
+        """
+
+        followers : set = set(self.followersUsernamesList())
+        following : set = set(self.followingUsernamesList())
+
+        unfollowers : list = list(following.intersection(followers))
 
         return sorted(unfollowers)
