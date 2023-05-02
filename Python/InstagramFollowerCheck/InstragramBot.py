@@ -14,3 +14,25 @@ class InstagramBot:
         self.api : Client = Client(username, password)
         self.token : str = self.api.generate_uuid()
         self.userId : str = self.api.authenticated_user_id
+
+    def followersInformationList(self) -> list:
+        """
+        Returns a list of dicts. Each dict is a follower with many information.
+        """
+
+        # Get first pagination
+        results : dict = self.api.user_followers(self.userId, self.token)
+        followersInfo : list = results["users"]
+        nextMaxId : str = results["next_max_id"]
+        
+        # Get others pagination
+        while nextMaxId:
+            results = self.api.user_followers(self.userId, self.token, max_id=nextMaxId)
+            followersInfo.extend(results["users"])
+            try:
+                nextMaxId = results["next_max_id"]
+            except Exception:
+                # If exception occurs, it means there isn't other paginations
+                nextMaxId = None
+
+        return followersInfo
