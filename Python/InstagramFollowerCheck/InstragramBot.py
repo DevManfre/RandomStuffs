@@ -45,7 +45,10 @@ class InstagramBot:
             self.userId = credentials["userId"]
         else:
             # Create new client
-            self.logger.info(f"Creating a client for \033[01m{username}\033[0m")
+            self.logger.info(
+                f"Creating a client for \033[01m{username}\033[0m"
+            )
+            
             self.api: Client = Client(username, password)
             self.token: str = self.api.generate_uuid()
             self.userId: str = self.api.authenticated_user_id
