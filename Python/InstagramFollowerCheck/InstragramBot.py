@@ -1,5 +1,6 @@
 from instagram_private_api import Client
 
+
 class InstagramBot:
     """
     Implementantion for instagram_private_api
@@ -8,12 +9,12 @@ class InstagramBot:
     - token, userId -> used for many intragram_private_api function
     """
 
-    def __init__(self, username : str, password : str):
-        self.username : str = username
-        self.password : str = password
-        self.api : Client = Client(username, password)
-        self.token : str = self.api.generate_uuid()
-        self.userId : str = self.api.authenticated_user_id
+    def __init__(self, username: str, password: str):
+        self.username: str = username
+        self.password: str = password
+        self.api: Client = Client(username, password)
+        self.token: str = self.api.generate_uuid()
+        self.userId: str = self.api.authenticated_user_id
 
     def __followInformationList(self, callingFunction) -> list:
         """
@@ -25,13 +26,14 @@ class InstagramBot:
         following).
         """
 
-        results : dict = callingFunction(self.userId, self.token)
-        followInfo : list = results["users"]
-        nextMaxId : str = results["next_max_id"]
-        
+        results: dict = callingFunction(self.userId, self.token)
+        followInfo: list = results["users"]
+        nextMaxId: str = results["next_max_id"]
+
         # Get others pagination
         while nextMaxId:
-            results = callingFunction(self.userId, self.token, max_id=nextMaxId)
+            results = callingFunction(
+                self.userId, self.token, max_id=nextMaxId)
             followInfo.extend(results["users"])
             try:
                 nextMaxId = results["next_max_id"]
@@ -50,10 +52,10 @@ class InstagramBot:
         the given function).
         """
 
-        followers : set = set(self.followersUsernamesList())
-        following : set = set(self.followingUsernamesList())
+        followers: set = set(self.followersUsernamesList())
+        following: set = set(self.followingUsernamesList())
 
-        results : list = list(callingFunction(following, followers))
+        results: list = list(callingFunction(following, followers))
 
         return sorted(results)
 
@@ -63,7 +65,7 @@ class InstagramBot:
         """
 
         return self.__followInformationList(self.api.user_followers)
-    
+
     def followingInformationList(self) -> list:
         """
         Returns a list of dicts. Each dict is a following with many information.
@@ -77,7 +79,7 @@ class InstagramBot:
         """
 
         return sorted([follower["username"] for follower in self.followersInformationList()])
-    
+
     def followingUsernamesList(self) -> list:
         """
         Return a sorted list contains the following usernames.
@@ -91,10 +93,10 @@ class InstagramBot:
         """
 
         return self.__combinatedUsernameList(set.difference)
-    
+
     def friendsUsernamesList(self) -> list:
         """
         Returns the following that is followers, thas is friends.
         """
-    
+
         return self.__combinatedUsernameList(set.intersection)
