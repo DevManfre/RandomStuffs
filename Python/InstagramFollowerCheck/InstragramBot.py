@@ -36,3 +36,25 @@ class InstagramBot:
                 nextMaxId = None
 
         return followersInfo
+    
+    def followingInformationList(self) -> list:
+        """
+        Returns a list of dicts. Each dict is a following with many information.
+        """
+
+        # Get first pagination
+        results : dict = self.api.user_following(self.userId, self.token)
+        followingInfo : list = results["users"]
+        nextMaxId : str = results["next_max_id"]
+        
+        # Get others pagination
+        while nextMaxId:
+            results = self.api.user_following(self.userId, self.token, max_id=nextMaxId)
+            followingInfo.extend(results["users"])
+            try:
+                nextMaxId = results["next_max_id"]
+            except Exception:
+                # If exception occurs, it means there isn't other paginations
+                nextMaxId = None
+
+        return followingInfo
