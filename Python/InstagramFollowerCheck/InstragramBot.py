@@ -1,6 +1,9 @@
 from instagram_private_api import Client
 import logging
 import coloredlogs
+import json
+import codecs
+import os
 
 
 class InstagramBot:
@@ -12,7 +15,12 @@ class InstagramBot:
     - logger -> used for debugging in the terminal.
     """
 
-    def __init__(self, username: str, password: str):
+    def __init__(self, username: str, password: str, rememberLogin: bool = False):
+        paths = {
+            "CACHE": "cache.json",
+            "CREDENTIALS": "credentials.json"
+        }
+
         # Logger Settings
         self.logger = logging.getLogger(username)
         coloredlogs.install(
@@ -22,24 +30,42 @@ class InstagramBot:
         )
 
         # Client settings
-        self.logger.info(f"Creating a client for \033[01m{username}\033[0m")
-        self.username: str = username
-        self.password: str = password
-        self.api: Client = Client(username, password)
-        self.token: str = self.api.generate_uuid()
-        self.userId: str = self.api.authenticated_user_id
+        if os.path.isfile(paths["CACHE"]) and os.path.isfile(paths["CREDENTIALS"]):
+            self.logger.debug(f"Loading cache files")
+            
+            cache, credentials = self.loadLogin(paths)
+
+            # Reuse auth settings
+            self.api = Client(
+                credentials["username"], 
+                credentials["password"],
+                settings=cache
+            )
+            self.token = credentials["token"]
+            self.userId = credentials["userId"]
+        else:
+            # Create new client
+            self.logger.info(f"Creating a client for \033[01m{username}\033[0m")
+            self.api: Client = Client(username, password)
+            self.token: str = self.api.generate_uuid()
+            self.userId: str = self.api.authenticated_user_id
+
+            if rememberLogin:
+                self.logger.debug(f"Creating cache files")
+                self.saveLogin(paths)
 
     def __followInformationList(self, callingFunction) -> list:
         """
         Function called from followersInformationList and followingInformationList to
         avoid repeated lines of code.
-        Given one param function (instagram_private_api.Client.user_followers or 
+        Given one param function (instagram_private_api.Client.user_followers or
         instagram_private_api.Client.user_following) the main function returns
         a list with all pagination together (composed respectively of followers or
         following).
         """
 
-        self.logger.debug(f"Calling the API method \033[01m{callingFunction.__name__}\033[0m")
+        self.logger.debug(
+            f"Calling the API method \033[01m{callingFunction.__name__}\033[0m")
 
         results: dict = callingFunction(self.userId, self.token)
         followInfo: list = results["users"]
@@ -47,7 +73,7 @@ class InstagramBot:
             nextMaxId: str = results["next_max_id"]
         except:
             # Error -> 0 follow, that is an empty followInfo list
-            return []
+            return followInfo
 
         # Get others pagination
         while nextMaxId:
@@ -123,3 +149,44 @@ class InstagramBot:
 
         self.logger.info("Getting the friends list")
         return self.__combinatedUsernameList(set.intersection)
+
+    def saveLogin(self, paths) -> None:
+        def toJson(pythonObject):
+            if isinstance(pythonObject, bytes):
+                return {
+                    '__class__': 'bytes',
+                    '__value__': codecs.encode(pythonObject, 'base64').decode()
+                }
+
+        with open(paths["CACHE"], 'w') as cacheFile:
+            json.dump(self.api.settings, cacheFile, default=toJson)
+        with open(paths["CREDENTIALS"], "w") as credentialsFile:
+            json.dump(
+                {
+                    "username": self.api.username,
+                    "password": self.api.password,
+                    "token": self.token,
+                    "userId": self.userId
+                },
+                credentialsFile,
+                default=toJson
+            )
+
+    def loadLogin(self, paths) -> tuple:
+        def fromJson(jsonObject):
+            if '__class__' in jsonObject and jsonObject['__class__'] == 'bytes':
+                return codecs.decode(jsonObject['__value__'].encode(), 'base64')
+            return jsonObject
+
+        cachedSettings = credentials = {}
+
+        with open(paths["CACHE"]) as file_data:
+            cachedSettings = json.load(file_data, object_hook=fromJson)
+        with open(paths["CREDENTIALS"]) as file_data:
+            credentials = json.load(file_data, object_hook=fromJson)
+
+        return cachedSettings, credentials
+
+#bot = InstagramBot("lost.manfre", "UsVaRD6!@DcU%n8#jMnszMK%f")
+bot = InstagramBot("caccaebrufoli", "caccaebrufoli00", True)
+print(bot.followingUsernamesList())
