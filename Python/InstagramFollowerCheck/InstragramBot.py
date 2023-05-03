@@ -21,7 +21,9 @@ class InstagramBot:
     The init method accepts 2 params: username and password so it can have:
     - api -> the logged client using the given username and password;
     - token, userId -> used for many intragram_private_api function;
-    - logger -> used for debugging in the terminal.
+    - logger -> used for debugging in the terminal;
+    - rememberLogin -> false by default. If enable, it create .json cache files
+    for relogin (used to avoid rate_limit_error)
     """
 
     def __init__(self, username: str, password: str, rememberLogin: bool = False):
