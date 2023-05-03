@@ -5,6 +5,15 @@ import json
 import codecs
 import os
 
+# TODO: Aggiungere il salvataggio delle varie chiamate di followers e following in una cartella
+# TODO: Funzione per rimuovere gli unfollowers
+# TODO: IMPORTANTE -> funzione per rallentare le chiamate alla API, per evitare le disconnessioni all'account
+# TODO: Aggiungere commenti a saveLogin e loadLogin
+# TODO: Implementare la CLI
+# TODO: rinominare InstagramBotCli in Cli
+# TODO: Gestire vari errori
+# TODO: rinominare cartella in InstagramBot
+# TODO: implementare versione telegram
 
 class InstagramBot:
     """
