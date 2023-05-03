@@ -11,9 +11,10 @@ import os
 # TODO: Aggiungere commenti a saveLogin e loadLogin
 # TODO: Implementare la CLI
 # TODO: rinominare InstagramBotCli in Cli
-# TODO: Gestire vari errori
+# TODO: rivedere il sistema di logging
 # TODO: rinominare cartella in InstagramBot
 # TODO: implementare versione telegram
+# TODO: repository a parte
 
 class InstagramBot:
     """
