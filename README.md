@@ -6,15 +6,19 @@ Random code written on my breaks.
 ## Index
 1. [Code Index](#code-index)
     * [Python](#python)
+    * [snippets](#snippets)
 2. [Commit Syntax](#commit-syntax)
 
 ## Code Index
 ### Python
 - **Collatz Conjecture** -> python class for the collatz conjecture sequence
 - **Keylogger** -> python class for a keylogger malware
+### snippets
+In this section it will add part of code and guide step by step to solve any kind of problems.
+* **python import module problem** -> how to resolve the problem of importing module in Python
 
 ## Commit Syntax
-For the commit, it use a revised [gitmoji.dev](http://www.gitmoji.dev) to explain the goal of the commit. In details, check the table below.
+For the commit, this repository use a revised [gitmoji.dev](http://www.gitmoji.dev) to explain the goal of the commit. In details, check the table below.
 | Emoji | Text Emoji (:name:) | Description |
 | ----- | ------------------- | ----------- |
 | :adhesive_bandage: | adhesive_bandage | Simple fix for a non-critical issue. |
