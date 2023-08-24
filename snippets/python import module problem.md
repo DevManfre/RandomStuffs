@@ -5,7 +5,8 @@ This is the error:
 ModuleNotFoundError: No module named '<module>'
 ```
 
-## Solution
+## Solutions
+### Solution #1
 First of all, che the PYTHONPATH:
 ```bash
 echo $PYTHONPATH
@@ -24,3 +25,13 @@ For setting **PYTHONPATH** more permanently (*LINUX*):
     echo $PYTHONPATH
     ```
 
+### Solution #2
+Another solution is to use both relative path syntax.  
+```
+try:
+    from dir.file import function
+    from dir.file import class
+except:
+    from file import function
+    from file import class
+```
