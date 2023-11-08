@@ -1,0 +1,63 @@
+:root{
+    --cup-color: solid white;
+    --cup-height: 140px;
+    --cup-width: 180px;
+    --cup-border: 10px;
+    --handle-height: 70px;
+    --handle-width: 40px;
+}
+
+body {
+    background-color: #efb54a;
+    margin: 0px;
+    padding: 0px;
+}
+
+.loading-screen{
+    width: calc(var(--cup-width) + var(--handle-width) + var(--cup-border)*3);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cup {
+    height: var(--cup-height);
+    width: var(--cup-width);
+    border: var(--cup-border) var(--cup-color);
+    border-radius: 0px 0px 70px 70px;
+    background: url("../coffee.png");
+    background-repeat: repeat-x;
+    background-position: 0px 140px;
+    animation: fill 3.5s infinite;
+}
+
+
+@keyframes fill {
+    0% {
+        background-position: 0px 140px;
+    }
+
+    20% {
+        background-position: -450px 100px;
+    }
+
+    40% {
+        background-position: -900px 50px;
+    }
+
+    80% {
+        background-position: -1350px -40px;
+    }
+}
+
+.handle {
+    height: var(--handle-height);
+    width: var(--handle-width);
+    background-color: transparent;
+    border: var(--cup-border) var(--cup-color);
+    position: relative;
+    left: 180px;
+    top: 2px;
+    border-radius: 0px 25px 80px 0px;
+}
