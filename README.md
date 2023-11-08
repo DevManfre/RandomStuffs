@@ -6,6 +6,8 @@ Random code written on my breaks.
 ## Index
 1. [Code Index](#code-index)
     * [HTML-CSS](#html-css)
+        - Loading Screen
+            - Cup Filling
     * [Python](#python)
     * [snippets](#snippets)
 2. [Commit Syntax](#commit-syntax)
