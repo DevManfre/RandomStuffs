@@ -5,11 +5,14 @@ Random code written on my breaks.
 
 ## Index
 1. [Code Index](#code-index)
+    * [HTML-CSS](#html-css)
     * [Python](#python)
     * [snippets](#snippets)
 2. [Commit Syntax](#commit-syntax)
 
 ## Code Index
+### HTML-CSS
+- **Loading Screen**
 ### Python
 - **Collatz Conjecture** -> python class for the collatz conjecture sequence
 - **Keylogger** -> python class for a keylogger malware
