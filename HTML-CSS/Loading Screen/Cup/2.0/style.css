@@ -1,0 +1,65 @@
+:root{
+    --cup-color: solid white;
+    --cup-height: 140px;
+    --cup-width: 180px;
+    --cup-border: 10px;
+    --handle-height: 70px;
+    --handle-width: 40px;
+}
+
+body {
+    background-color: #efb54a;
+    margin: 0px;
+    padding: 0px;
+}
+
+.loading-screen{
+    width: calc(var(--cup-width) + var(--handle-width) + var(--cup-border)*3);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cup {
+    height: var(--cup-height);
+    width: var(--cup-width);
+    border: var(--cup-border) var(--cup-color);
+    border-radius: 0px 0px 70px 70px;
+}
+
+
+@keyframes fill {
+    0% {
+        background-position: 0px 140px;
+    }
+    70% {
+        background-position: -1350px -40px;
+    }
+}
+
+.cup .coffee {
+    height: calc(var(--cup-height) - var(--cup-border) * 5);
+    width: calc(var(--cup-width) - var(--cup-border) * 4);
+    border: var(--cup-border) solid transparent;
+    border-radius: 0px 0px 50px 50px;
+    background: url("../coffee.png");
+    background-repeat: repeat-x;
+    background-position: 0px 140px;
+    animation: fill 5s infinite;
+    position: relative;
+    left: calc(var(--cup-border) * -1);
+    top: calc(var(--cup-border) * -2 - var(--handle-height));
+    margin: calc(var(--cup-border) * 2);
+}
+
+.cup .handle {
+    height: var(--handle-height);
+    width: var(--handle-width);
+    background-color: transparent;
+    border: var(--cup-border) var(--cup-color);
+    position: relative;
+    left: 180px;
+    top: 2px;
+    border-radius: 0px 25px 80px 0px;
+}
