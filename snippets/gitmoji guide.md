@@ -8,6 +8,7 @@ All the reference to https://gitmoji.dev/
 | :heavy_plus_sign: | heavy_plus_sign | Add a dependency. | package, dependency |
 | :memo: | memo | Add or update any kind of documentation. | documentation, readme.md |
 | :package:| package | Add or update compiled files or packages. | package, dependency, compiled file |
+| :see_no_evil: | see_no_evil | Add or update gitignore file. | gitignore |
 | :sparkles: | sparkles | Add a new feature. | feature |
 | :twisted_rightwards_arrows: | twisted_rightwards_arrows | Merge branches. | merge, branch |
 | :zap: | zap | Improve performance | performance |
