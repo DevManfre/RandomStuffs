@@ -7,6 +7,7 @@ All the reference to https://gitmoji.dev/
 ! :bug: | bug | Fix a bug. | bug|
 | :fire: | fire | Remove code or delete files. | remove, delete |
 | :heavy_plus_sign: | heavy_plus_sign | Add a dependency. | package, dependency |
+| :lipstick: | lipstick | Improve graphic interface or something similar. | UI, interface, UX |
 | :memo: | memo | Add or update any kind of documentation. | documentation, readme.md |
 | :package:| package | Add or update compiled files or packages. | package, dependency, compiled file |
 | :see_no_evil: | see_no_evil | Add or update gitignore file. | gitignore |
