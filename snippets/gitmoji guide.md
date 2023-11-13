@@ -6,6 +6,7 @@ All the reference to https://gitmoji.dev/
 | :art: | art | Improve format or structure of the code. | code, structure |
 ! :bug: | bug | Fix a bug. | bug|
 | :fire: | fire | Remove code or delete files. | remove, delete |
+| :hammer: | hammer | Add or working on code. | code, general code commit | 
 | :heavy_plus_sign: | heavy_plus_sign | Add a dependency. | package, dependency |
 | :lipstick: | lipstick | Improve graphic interface or something similar. | UI, interface, UX |
 | :memo: | memo | Add or update any kind of documentation. | documentation, readme.md |
