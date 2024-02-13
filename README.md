@@ -8,6 +8,8 @@ Random code written on my breaks.
     * [HTML-CSS](#html-css)
         - Loading Screen
             - Cup Filling
+    * [PHP](#php)
+        - PHP Note
     * [Python](#python)
     * [snippets](#snippets)
 2. [Commit Syntax](#commit-syntax)
@@ -15,6 +17,8 @@ Random code written on my breaks.
 ## Code Index
 ### HTML-CSS
 - **Loading Screen**
+### PHP
+- **PHP Note** -> PHP language reasume
 ### Python
 - **Collatz Conjecture** -> python class for the collatz conjecture sequence
 - **Keylogger** -> python class for a keylogger malware
