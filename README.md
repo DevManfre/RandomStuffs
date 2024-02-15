@@ -8,6 +8,8 @@ Random code written on my breaks.
     * [HTML-CSS](#html-css)
         - Loading Screen
             - Cup Filling
+    * [JavaScript](#javascript)
+        - Javascript Note
     * [PHP](#php)
         - PHP Note
     * [Python](#python)
@@ -17,6 +19,8 @@ Random code written on my breaks.
 ## Code Index
 ### HTML-CSS
 - **Loading Screen**
+### Javascript
+- **Javascript Note** -> Javascript language reasume
 ### PHP
 - **PHP Note** -> PHP language reasume
 ### Python
