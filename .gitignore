@@ -1,2 +1,7 @@
-# General
+# Python
 **/__pycache__
+
+# Python/from_query_to_csv
+/Python/from_query_to_csv/build
+/Python/from_query_to_csv/dist
+/Python/from_query_to_csv/*.spec
