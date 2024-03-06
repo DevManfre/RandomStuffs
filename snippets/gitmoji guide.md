@@ -17,4 +17,5 @@ All the reference to https://gitmoji.dev/
 | :see_no_evil: | see_no_evil | Add or update gitignore file. | gitignore |
 | :sparkles: | sparkles | Add a new feature. | feature |
 | :twisted_rightwards_arrows: | twisted_rightwards_arrows | Merge branches. | merge, branch |
+| :wrench: | wrench | Add or update configuration files. | configuration |
 | :zap: | zap | Improve performance | performance |
