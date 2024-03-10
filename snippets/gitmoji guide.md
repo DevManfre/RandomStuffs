@@ -16,6 +16,7 @@ All the reference to https://gitmoji.dev/
 | :package:| package | Add or update compiled files or packages. | package, dependency, compiled file |
 | :see_no_evil: | see_no_evil | Add or update gitignore file. | gitignore |
 | :sparkles: | sparkles | Add a new feature. | feature |
+| :truck: | truck | Rename resourcers. | rename |
 | :twisted_rightwards_arrows: | twisted_rightwards_arrows | Merge branches. | merge, branch |
 | :wrench: | wrench | Add or update configuration files. | configuration |
 | :zap: | zap | Improve performance | performance |
